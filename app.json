@@ -5,30 +5,36 @@
     "pages/student/student"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "南哪儿组局",
-    "navigationBarTextStyle": "black"
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "#bbbbbb",
-    "selectedColor": "#07c160",
+    "selectedColor": "#8dc63f",
     "backgroundColor": "#ffffff",
     "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/hot/hot",
-        "text": "推荐"
+        "text": "推荐",
+        "iconPath": "/images/tabbar/suggest.png",
+        "selectedIconPath": "/images/tabbar/suggest_cur.png"
       },
       {
         "pagePath": "pages/search/search",
-        "text": "搜索"
+        "text": "搜索",
+        "iconPath": "/images/tabbar/search.png",
+        "selectedIconPath": "/images/tabbar/search_cur.png"
       },
       {
         "pagePath": "pages/student/student",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "/images/tabbar/my.png",
+        "selectedIconPath": "/images/tabbar/my_cur.png"
       }
     ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
