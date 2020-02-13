@@ -1,2 +1,115 @@
 <!--pages/game/index.wxml-->
-<text>pages/game/index.wxml</text>
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{name}}</view>
+</cu-custom>
+
+<scroll-view scroll-x class="bg-green nav text-center">
+  <view class="cu-item {{0==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="0">
+    <text class="cuIcon-edit"></text> 熟练测试
+  </view>
+  <view class="cu-item {{1==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="1">
+    <text class="cuIcon-form"></text> 创建组局
+  </view>
+  <view class="cu-item {{2==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="2">
+    <text class="cuIcon-search"></text> 查询组局
+  </view>
+</scroll-view>
+<swiper class="swiper" style="height:700px" current="{{TabCur}}" duration="200" bindchange="swiperChange">
+  <swiper-item>
+    <!-- 熟练测试 -->
+    <view>
+      <view class="solids-bottom flex align-center">
+        <view class="padding">1</view>
+        <view class="flex-sub text-center">
+          <view class="padding">{{questions[0].description}}</view>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <view class="title">请选择</view>
+        <picker bindchange="PickerChange1" value="{{chosen1}}" range="{{picker1}}">
+          <view class="picker">
+            {{chosen1?picker1[chosen1]:'待选择'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view>
+      <view class="solids-bottom flex align-center">
+        <view class="padding">2</view>
+        <view class="flex-sub text-center">
+          <view class="padding">{{questions[1].description}}</view>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <view class="title">请选择</view>
+        <picker bindchange="PickerChange2" value="{{chosen2}}" range="{{picker2}}">
+          <view class="picker">
+            {{chosen2?picker2[chosen2]:'待选择'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view>
+      <view class="solids-bottom flex align-center">
+        <view class="padding">3</view>
+        <view class="flex-sub text-center">
+          <view class="padding">{{questions[2].description}}</view>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <view class="title">请选择</view>
+        <picker bindchange="PickerChange3" value="{{chosen3}}" range="{{picker3}}">
+          <view class="picker">
+            {{chosen3?picker3[chosen3]:'待选择'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view>
+      <view class="solids-bottom flex align-center">
+        <view class="padding">4</view>
+        <view class="flex-sub text-center">
+          <view class="padding">{{questions[3].description}}</view>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <view class="title">请选择</view>
+        <picker bindchange="PickerChange4" value="{{chosen4}}" range="{{picker4}}">
+          <view class="picker">
+            {{chosen4?picker4[chosen4]:'待选择'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view>
+      <view class="solids-bottom flex align-center">
+        <view class="padding">5</view>
+        <view class="flex-sub text-center">
+          <view class="padding">{{questions[4].description}}</view>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <view class="title">请选择</view>
+        <picker bindchange="PickerChange5" value="{{chosen5}}" range="{{picker5}}">
+          <view class="picker">
+            {{chosen5?picker5[chosen5]:'待选择'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="padding flex flex-direction">
+      <button class="cu-btn bg-green lg" bindtap="submitQuiz">提交</button>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <!-- 创建组局 -->
+    <view>我是tab2</view>
+  </swiper-item>
+
+  <swiper-item>
+    <!-- 查询组局 -->
+    <view>我是tab3</view>
+  </swiper-item>
+</swiper>

@@ -6,7 +6,7 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          console.log(res.code);
+          console.log('weixin code : ' + res.code);
           //发起网络请求
           wx.request({
             url: 'http://115.29.224.114:8010/team/student/wxlogin',
@@ -18,11 +18,15 @@ App({
             },
             method: 'POST',
             success: res => {
-              this.globalData.openid = res.data.openid;
+              console.log(res)
+              this.globalData.openid = res.data.data.openid
+              this.globalData.studentId = res.data.data.studentId
               // if (this.loginCallback) {
-              //   this.loginCallback(res.data.openid)
+              //   this.loginCallback(res.data.data.openid)
               // }
-              wx.setStorageSync("openid", res.data.openid)
+              wx.setStorageSync("openid", res.data.data.openid)
+              wx.setStorageSync("studentId", res.data.data.studentId)
+              console.log('openid : ' + res.data.data.openid)
             },
             fail: res => {
               console.log('后台登录失败！' + res.errMsg)
@@ -52,7 +56,7 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          console.log(res.code);
+          console.log('weixin code : ' + res.code);
           //发起网络请求
           wx.request({
             url: 'http://115.29.224.114:8010/team/student/wxlogin',
@@ -64,13 +68,14 @@ App({
             },
             method: 'POST',
             success: res => {
-              this.globalData.openid = res.data.openid;
-              this.globalData.studentId = res.data.studentId;
+              this.globalData.openid = res.data.data.openid;
+              this.globalData.studentId = res.data.data.studentId;
               // if (this.loginCallback) {
-              //   this.loginCallback(res.data.openid)
+              //   this.loginCallback(res.data.data.openid)
               // }
-              wx.setStorageSync("openid", res.data.openid)
-              wx.setStorageSync("studentId", res.data.studentId)
+              wx.setStorageSync("openid", res.data.data.openid)
+              wx.setStorageSync("studentId", res.data.data.studentId)
+              console.log('openid : ' + res.data.data.openid)
             },
             fail: res => {
               console.log('后台登录失败！' + res.errMsg)

@@ -10,6 +10,7 @@ Page({
    */
   data: {
     CustomBar: app.globalData.CustomBar,
+    hotNum : 5,
     games: []
   },
 
@@ -20,7 +21,7 @@ Page({
       url: 'team/game/hot',
       content_type: 'application/x-www-form-urlencoded; charset=UTF-8',
       data: {
-        'num': 5
+        'num': this.data.hotNum
       },
       success: (res) => {
         console.log(res);

@@ -1,4 +1,8 @@
 // pages/student/student.js
+import wxRequest from "../../api/common.js";
+
+const app = getApp();
+
 Page({
 
   /**

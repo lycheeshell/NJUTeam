@@ -5,7 +5,7 @@ const wxRequest = (params, url) => {
   if (auth == '') {
     app.onLogin();
   }
-  console.log(auth);
+  console.log("auth openid : " + auth);
   wx.request({
     url: prefix + params.url,
     data: params.data || '',
