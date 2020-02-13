@@ -65,10 +65,12 @@ App({
             method: 'POST',
             success: res => {
               this.globalData.openid = res.data.openid;
+              this.globalData.studentId = res.data.studentId;
               // if (this.loginCallback) {
               //   this.loginCallback(res.data.openid)
               // }
               wx.setStorageSync("openid", res.data.openid)
+              wx.setStorageSync("studentId", res.data.studentId)
             },
             fail: res => {
               console.log('后台登录失败！' + res.errMsg)
@@ -81,7 +83,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null,
+    studentId: '',
     openid: '',
     prefix_url: "http://115.29.224.114:8010/"
   }

@@ -2,7 +2,8 @@
   "pages": [
     "pages/hot/hot",
     "pages/search/search",
-    "pages/student/student"
+    "pages/student/student",
+    "pages/game/index"
   ],
   "window": {
     "navigationStyle": "custom"

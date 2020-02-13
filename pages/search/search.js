@@ -10,7 +10,8 @@ Page({
    */
   data: {
     CustomBar: app.globalData.CustomBar,
-    word: ''
+    word: '',
+    games: []
   },
 
   wordInput: function (e) {
@@ -21,7 +22,6 @@ Page({
 
   searchGame(e) {
     var keyWord = this.data.word;
-    console.log(keyWord);
     //根据搜索框内容查找游戏
     wxRequest({
       url: 'team/game/search',
@@ -31,8 +31,49 @@ Page({
       },
       success: (res) => {
         console.log(res);
-        
+        this.setData({
+          games: res.data.data
+        })
       },
     });
+  },
+
+  switchToGame(e) {
+    var gameId = e.currentTarget.id;
+    wx.navigateTo({
+      url: "../game/index?gameId=" + gameId
+    })
+  },
+
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  // ListTouch计算方向
+  ListTouchMove(e) {
+    this.setData({
+      ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
+    })
+  },
+  // ListTouch计算滚动
+  ListTouchEnd(e) {
+    if (this.data.ListTouchDirection == 'left') {
+      this.setData({
+        modalName: e.currentTarget.dataset.target
+      })
+    } else {
+      this.setData({
+        modalName: null
+      })
+    }
+    this.setData({
+      ListTouchDirection: null
+    })
   }
 })

@@ -1,2 +1,45 @@
 <!--pages/hot/hot.wxml-->
-<text>pages/hot/hot.wxml</text>
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <cu-custom bgColor="bg-gradual-pink">
+    <view slot="content">热门</view>
+  </cu-custom>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 热门游戏
+    </view>
+  </view>
+  <!-- 
+  <view class="cu-list menu-avatar">
+    <view class="cu-item">
+      <view class="cu-avatar radius lg" 
+      style="background-image:url(../../images/tabbar/suggest.png);"></view>
+      <view class="content">
+        <view class="text-grey">明星三缺一</view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">港式麻将</text>
+        </view>
+      </view>
+      <view class="action">
+      </view>
+    </view>
+  </view>
+   -->
+  <block wx:for="{{games}}">
+  <view class="cu-list menu-avatar" id="{{item.gameId}}" bindtap="switchToGame">
+    <view class="cu-item">
+      <view wx:if="{{item.imageUrl == null}}" class="cu-avatar radius lg" 
+      style="background-image:linear-gradient;"></view>
+      <view wx:else class="cu-avatar radius lg" 
+      style="background-image:url({{item.imageUrl}});"></view>
+      <view class="content">
+        <view class="text-grey">{{item.name}}</view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">{{item.description}}</text>
+        </view>
+      </view>
+      <view class="action">
+      </view>
+    </view>
+  </view>
+  </block>
+</scroll-view>
