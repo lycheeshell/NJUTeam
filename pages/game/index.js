@@ -34,7 +34,11 @@ Page({
     location: '',
     minPerson: -1,
     maxPerson: -1,
-    minAdeptScore: -1
+    minAdeptScore: -1,
+    dateEarly: util.formatDate(new Date()),
+    dateLate: util.formatDate(new Date()),
+    regionQuery: ['江苏省', '南京市', '玄武区'],
+    queryMinAdeptScore: -1
   },
 
   /**
@@ -114,6 +118,39 @@ Page({
     });
   },
 
+  //查询组局
+  queryPlay(e) {
+    var startTime = this.data.dateEarly + ' '  + '00:00:00';
+    var endTime = this.data.dateLate + ' ' + '23:59:59';
+    var province = this.data.regionQuery[0];
+    var city = this.data.regionQuery[1];
+    var county = this.data.regionQuery[2];
+    var minAdeptScore = this.data.queryMinAdeptScore;
+
+    var start_date = new Date(startTime.replace(/-/g, "/"));
+    var end_date = new Date(endTime.replace(/-/g, "/"));
+    if (end_date.getTime() - start_date.getTime() < 0) {
+      this.showModal4();
+      return;
+    }
+
+    if (minAdeptScore != -1 && (minAdeptScore < 0 || minAdeptScore > 100)) {
+      this.showModal4();
+      return;
+    }
+
+    var suffix = '?gameId=' + this.data.gameId + '&name=' + this.data.name + '&studentId=' + this.data.studentId;
+    suffix = suffix + '&startTime=' + startTime + '&endTime=' + endTime + '&province=' + province + '&city=' + city + '&county=' + county;
+    if (minAdeptScore != -1) {
+      suffix = suffix + '&minAdeptScore=' + minAdeptScore;
+    }
+    console.log(suffix)
+    wx.navigateTo({
+      url: 'play/play' + suffix
+    })
+
+  },
+
   //创建组局
   createPlay(e) {
     var startTime = this.data.date + ' ' + this.data.startTime + ':00';
@@ -133,7 +170,7 @@ Page({
       return;
     }
 
-    if(location == '' || minPerson == -1 || maxPerson == -1 || minAdeptScore == -1) {
+    if (location == '' || minPerson < 0 || maxPerson < 0 || minAdeptScore < 0 || minAdeptScore > 100) {
       this.showModal1();
       return;
     }
@@ -157,9 +194,29 @@ Page({
       success: (res) => {
         console.log(res);
         if (res.data.status == 200) {
+          var playId = res.data.data.playId;
+          wxRequest({
+            url: 'team/play/addParticipant',
+            content_type: 'application/x-www-form-urlencoded; charset=UTF-8',
+            method: 'POST',
+            data: {
+              'playId': playId,
+              'studentId': this.data.studentId
+            },
+            success: (res2) => {
+              console.log(res2);
+            },
+          });
+
           this.showModal2();
+        
+        } else {
+          this.showModal1();
         }
       },
+      fail: (res) => {
+        this.showModal1();
+      }
     });
 
   },
@@ -185,6 +242,12 @@ Page({
   minAdeptScoreInput: function (e) {
     this.setData({
       minAdeptScore: e.detail.value
+    })
+  },
+
+  QueryMinAdeptScoreInput: function (e) {
+    this.setData({
+      queryMinAdeptScore: e.detail.value
     })
   },
 
@@ -264,9 +327,27 @@ Page({
     })
   },
 
+  DateEarlyChange(e) {
+    this.setData({
+      dateEarly: e.detail.value
+    })
+  },
+
+  DateLateChange(e) {
+    this.setData({
+      dateLate: e.detail.value
+    })
+  },
+
   RegionChange: function (e) {
     this.setData({
       region: e.detail.value
+    })
+  },
+
+  QueryRegionChange: function (e) {
+    this.setData({
+      regionQuery: e.detail.value
     })
   },
 
@@ -341,6 +422,17 @@ Page({
   hideModal2(e) {
     this.setData({
       modalName2: null
+    })
+  },
+
+  showModal4() {
+    this.setData({
+      modalName4: 'Modal4'
+    })
+  },
+  hideModal4(e) {
+    this.setData({
+      modalName4: null
     })
   },
 

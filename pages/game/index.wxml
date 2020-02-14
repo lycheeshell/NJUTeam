@@ -158,11 +158,11 @@
       </view>
       <view class="cu-form-group">
         <view class="title">最小人数</view>
-        <input placeholder="请输入0~9的数字" bindinput="minPersonInput"></input>
+        <input placeholder="请输入数字" bindinput="minPersonInput"></input>
       </view>
       <view class="cu-form-group">
         <view class="title">最大人数</view>
-        <input placeholder="请输入0~9的数字" bindinput="maxPersonInput"></input>
+        <input placeholder="请输入数字" bindinput="maxPersonInput"></input>
       </view>
       <view class="cu-form-group">
         <view class="title">最少熟练</view>
@@ -196,7 +196,7 @@
           </view>
         </view>
         <view class="padding-xl">
-          请填写完整组局信息！开始时间早于结束时间！
+          请检查完整组局信息！
         </view>
       </view>
     </view>
@@ -204,6 +204,52 @@
 
   <swiper-item>
     <!-- 查询组局 -->
-    <view>我是tab3</view>
+    <form>
+      <view class="cu-form-group">
+        <view class="title">最早日期</view>
+        <picker mode="date" value="{{dateEarly}}" start="2020-01-01" end="2021-01-01" bindchange="DateEarlyChange">
+          <view class="picker">
+            {{dateEarly}}
+          </view>
+        </picker>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">最晚日期</view>
+        <picker mode="date" value="{{dateLate}}" start="2020-01-01" end="2021-01-01" bindchange="DateLateChange">
+          <view class="picker">
+            {{dateLate}}
+          </view>
+        </picker>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">选择地址</view>
+        <picker mode="region" bindchange="QueryRegionChange" value="{{regionQuery}}" custom-item="{{customItem}}">
+          <view class="picker">
+            {{regionQuery[0]}}，{{regionQuery[1]}}，{{regionQuery[2]}}
+          </view>
+        </picker>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">最少熟练</view>
+        <input placeholder="请输入0~100的数字" bindinput="QueryMinAdeptScoreInput"></input>
+      </view>
+    </form>
+    <view class="padding flex flex-direction">
+      <button class="cu-btn bg-green lg" bindtap="queryPlay">查询</button>
+    </view>
+    <!-- 请填写完整信息的弹窗 -->
+    <view class="cu-modal {{modalName4=='Modal4'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+          <view class="content">注意</view>
+          <view class="action" bindtap="hideModal4">
+            <text class="cuIcon-close text-red"></text>
+          </view>
+        </view>
+        <view class="padding-xl">
+          请检查完整组局信息！
+        </view>
+      </view>
+    </view>
   </swiper-item>
 </swiper>
