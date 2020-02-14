@@ -4,14 +4,11 @@
     "pages/search/search",
     "pages/student/student",
     "pages/game/index",
-<<<<<<< HEAD
     "pages/student/history/history",
     "pages/student/participant/participant",
     "pages/student/admin/admin",
-    "pages/student/info/info"
-=======
+    "pages/student/info/info",
     "pages/game/play/play"
->>>>>>> 3ce64803589aece47f8ccdaf2232c3e690d4b131
   ],
   "window": {
     "navigationStyle": "custom"
