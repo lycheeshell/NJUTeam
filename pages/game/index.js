@@ -8,15 +8,17 @@ Page({
   data: {
     TabCur: 0,
     gameId : '',
+    studentId : '',
+    score : 0,
     quizNum : 5,
     questions : [],
     correctOptions : [],
     plays : [],
-    chosen1: null,
-    chosen2: null,
-    chosen3: null,
-    chosen4: null,
-    chosen5: null,
+    chosen1: -1,
+    chosen2: -1,
+    chosen3: -1,
+    chosen4: -1,
+    chosen5: -1,
     picker1: [],
     picker2: [],
     picker3: [],
@@ -29,9 +31,27 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      gameId: options.gameId
+      gameId: options.gameId,
+      studentId: wx.getStorageSync("studentId")
     })
-    console.log(this.data.gameId);
+    console.log('gameId:' + this.data.gameId + ', studentId:' + this.data.studentId);
+
+    //查找用户的熟练分
+    wxRequest({
+      url: 'team/game/getAdept',
+      content_type: 'application/x-www-form-urlencoded; charset=UTF-8',
+      data: {
+        'studentId': this.data.studentId,
+        'gameId' : this.data.gameId
+      },
+      success: (res) => {
+        console.log(res);
+        this.setData({
+          score: res.data.data.score
+        })
+      },
+    });
+
     //查找问卷
     wxRequest({
       url: 'team/game/getQuiz',
@@ -70,8 +90,44 @@ Page({
 
   submitQuiz(e) {
     var crtOpt = this.data.correctOptions;
-    console.log(crtOpt);
-    
+    var scoreTemp = 0;
+    if (this.data.chosen1 == crtOpt[0]) {
+      scoreTemp = scoreTemp + 20;
+    }
+    if (this.data.chosen2 == crtOpt[1]) {
+      scoreTemp = scoreTemp + 20;
+    }
+    if (this.data.chosen3 == crtOpt[2]) {
+      scoreTemp = scoreTemp + 20;
+    }
+    if (this.data.chosen4 == crtOpt[3]) {
+      scoreTemp = scoreTemp + 20;
+    }
+    if (this.data.chosen5 == crtOpt[4]) {
+      scoreTemp = scoreTemp + 20;
+    }
+    this.setData({
+      score : scoreTemp
+    })
+    console.log('score:' + this.data.score);
+
+    //查更新用户的熟练分
+    wxRequest({
+      url: 'team/game/updateAdept',
+      content_type: 'application/x-www-form-urlencoded; charset=UTF-8',
+      method: 'POST',
+      data: {
+        'studentId': this.data.studentId,
+        'gameId': this.data.gameId,
+        'score' : this.data.score
+      },
+      success: (res) => {
+        console.log(res);
+        if (res.data.status == 200) {
+          this.showModal();
+        }
+      },
+    });
   },
 
   optionToNum(str) {
@@ -128,6 +184,17 @@ Page({
     this.setData({
       TabCur: e.currentTarget.dataset.id,
     })
-  }
+  },
+
+  showModal() {
+    this.setData({
+      modalName: 'Modal'
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
 
 })
