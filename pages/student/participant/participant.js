@@ -1,5 +1,5 @@
 // pages/student/participant/participant.js
-import wxRequest from "../../api/common.js";
+import wxRequest from "../../../api/common.js";
 
 const app = getApp();
 
