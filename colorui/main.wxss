@@ -938,7 +938,7 @@ button.icon.lg {
 	text-align: center;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	background-color:white;
 	color: var(--white);
 	white-space: nowrap;
 	position: relative;
@@ -963,8 +963,8 @@ button.icon.lg {
 }
 
 .cu-avatar.xl {
-	width: 128rpx;
-	height: 128rpx;
+	width: 150rpx;
+	height: 150rpx;
 	font-size: 2.5em;
 }
 

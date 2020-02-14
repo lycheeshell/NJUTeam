@@ -1,2 +1,65 @@
 <!--pages/student/student.wxml-->
-<text>pages/student/student.wxml</text>
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">我的</view>
+</cu-custom>
+<view class="bg-white padding ">
+  <view class="flex justify-center">
+    <view class="flex bg-white padding-sm margin-xs radius">
+      <view class="cu-avatar round xl margin-left" style="background-image:url(/images/avatar/1.jpg)" bindtap=""></view>
+    </view>
+    <view class="flex bg-white padding-sm margin-xs radius justify-center">
+      <view class="grid col-1 margin-bottom ">
+        <view class="bg-white padding">
+          <text class="text-black text-bold">用户昵称</text>
+        </view>
+        <view class="bg-white padding">个人信息修改
+          <text class="cuIcon-write lg text-gray" bindtap=""></text>
+        </view>
+      </view>
+    </view>
+    <view class="flex bg-white padding-sm margin-xs radius justify-center">
+      <view class="grid col-1 margin-bottom ">
+        <view class="bg-white padding">
+          <text class="text-black text-bold">信誉积分</text>
+        </view>
+        <view class="bg-white padding">200</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<scroll-view class="page">
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-grey">我参与的游戏</text>
+    </view>
+    <view class="action" bindtap="switchToParti">
+      <view class="cu-item" >
+        <text class="cuIcon-roundright xl text-gray"></text>
+        <text>更多</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action" bindtap="switchToHis">
+      <text class="cuIcon-title text-grey">历史游戏</text>
+    </view>
+    <view class="action">
+      <view class="cu-item">
+        <text class="cuIcon-roundright xl text-gray"></text>
+        <text>更多</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action" bindtap="switchToAdmin">
+      <text class="cuIcon-title text-grey">管理</text>
+    </view>
+    <view class="action">
+      <view class="cu-item">
+        <text class="cuIcon-roundright xl text-gray"></text>
+        <text>更多</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

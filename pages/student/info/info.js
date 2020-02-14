@@ -1,8 +1,4 @@
-// pages/student/student.js
-import wxRequest from "../../api/common.js";
-
-const app = getApp();
-
+// pages/student/info/info.js
 Page({
 
   /**
@@ -18,20 +14,7 @@ Page({
   onLoad: function (options) {
 
   },
-  switchToParti(e) {
-    // var stuId = e.currentTarget.id;
-    // console.log(stuId);
-    // wx.navigateTo({
-    //   url: "../student/participant/participant?stuId=" + stuId
-    // })
-  },
-  switchToHis(e){
 
-  },
-  switchToAdmin(e){
-
-  }
-  ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

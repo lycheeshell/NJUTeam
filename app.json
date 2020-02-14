@@ -3,7 +3,11 @@
     "pages/hot/hot",
     "pages/search/search",
     "pages/student/student",
-    "pages/game/index"
+    "pages/game/index",
+    "pages/student/history/history",
+    "pages/student/participant/participant",
+    "pages/student/admin/admin",
+    "pages/student/info/info"
   ],
   "window": {
     "navigationStyle": "custom"
