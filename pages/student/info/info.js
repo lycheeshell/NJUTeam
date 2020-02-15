@@ -16,14 +16,11 @@ Page({
     phone: '',
     sex: -1,
     sexlist: ['男', '女'],
-    birthday: '选择',
+    birthday: util.formatDate(new Date()),
     school: '',
-    startYear: '选择',
+    startYear: 0,
     pwd: '',
-    newpwd: '',
-    imgUrl: '',
-    credit: '',
-    session_key:''
+    newpwd: ''
   },
 
   /**
@@ -41,14 +38,26 @@ Page({
       },
       success: (res) => {
         console.log(res);
+        var account = res.data.data.account;
+        var email = res.data.data.email;
+        var phone = res.data.data.phone;
+        var sex = res.data.data.sex;
+        var school = res.data.data.school;
+        var birthday = res.data.data.birthday.substring(0, 10);
+        var startyear = res.data.data.startYear;
         this.setData({
-          imgUrl: res.data.data.photoUrl,
-          credit: res.data.data.credit,
-          session_key:res.data.data.session_key
+          account: account,
+          mail: email,
+          phone: phone,
+          sex: sex,
+          birthday: birthday,
+          school: school,
+          startYear: startyear
         })
       },
     });
   },
+
   updateInfo(e) {
     var account = this.data.account;
     var mail = this.data.mail;
@@ -57,13 +66,14 @@ Page({
     var school = this.data.school;
     var pwd = this.data.pwd;
     var nwpwd = this.data.newpwd;
-    var birthday = new Date(this.data.birthday.replace(/-/g, "/"));
-    var startyear = util.formatDate(new Date(this.data.startyear)).split('-')[0];
-    var imgUrl = this.data.imgUrl;
-    var credit = this.data.credit;
-    var session_key = this.data.session_key;
-    console.log(birthday + " " + startyear);
-    if (account == '' || mail == '' || phone == '' || sex == '' || school == '' || birthday == '' || startyear == '' || pwd == '' || nwpwd == '') {
+    var birthday = this.data.birthday + ' ' + '00:00:00';
+    var startyear = this.data.startYear;
+
+    if (account == '' || mail == '' || phone == '' || school == '' || birthday == '' || startyear == '' || pwd == '' || nwpwd == '') {
+      this.showModal1();
+      return;
+    }
+    if (account.length > 20 || phone.length > 15 || mail.length > 40 || pwd.length > 20) {
       this.showModal1();
       return;
     }
@@ -71,11 +81,16 @@ Page({
       this.showModal4();
       return;
     }
-    // sex == '男' ? 0 : 1;
-    if(sex < 0 || sex >1) {
+    if (sex < 0 || sex > 1) {
       this.showModal1();
       return;
     }
+    startyear = parseInt(startyear);
+    if (isNaN(startyear) || startyear < 2000 || startyear > 2030) {
+      this.showModal1();
+      return;
+    }
+    
     wxRequest({
       url: 'team/student/update',
       content_type: 'application/json',
@@ -83,16 +98,13 @@ Page({
       data: {
         'studentId': this.data.studentId,
         'account': account,
+        'phone': phone,
         'email': mail,
         'sex': sex,
         'birthday': birthday,
         'school': school,
         'startYear': startyear,
-        'password':pwd,
-        'photoUrl': imgUrl,
-        'credit':credit,
-        'openid': wx.getStorageSync("openid"),
-        'session_key':session_key
+        'password':pwd
       },
       success: (res) => {
         console.log(res);
@@ -114,6 +126,7 @@ Page({
       }
     });
   },
+
   accountInput: function(e) {
     this.setData({
       account: e.detail.value

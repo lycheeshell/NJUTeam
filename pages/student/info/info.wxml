@@ -5,16 +5,16 @@
 </cu-custom>
 <form class="">
   <view class="cu-form-group">
-    <view class="title">账户名</view>
-    <input placeholder="请输入账户名" bindinput="accountInput"></input>
+    <view class="title">昵称</view>
+    <input placeholder="{{account==''?'请输入昵称':account}}" bindinput="accountInput"></input>
   </view>
   <view class="cu-form-group ">
     <view class="title">邮箱</view>
-    <input placeholder="请输入邮箱" bindinput="mailInput"></input>
+    <input placeholder="{{mail==''?'请输入邮箱':mail}}" bindinput="mailInput"></input>
   </view>
   <view class="cu-form-group ">
     <view class="title">手机号码</view>
-    <input placeholder="请输入手机号码" bindinput="phoneInput"></input>
+    <input placeholder="{{phone==''?'请输入手机号码':phone}}" bindinput="phoneInput"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">性别</view>
@@ -24,7 +24,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">出生日期</view>
-    <picker mode="date" value="{{birthday}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+    <picker mode="date" value="{{birthday}}" start="1990-01-01" end="2030-12-31" bindchange="DateChange">
       <view class="picker">
         {{birthday}}
       </view>
@@ -32,15 +32,11 @@
   </view>
   <view class="cu-form-group ">
     <view class="title">所在学校</view>
-    <input placeholder="请输入学校名字" bindinput="schoolInput"></input>
+    <input placeholder="{{school==''?'请输入学校名字':school}}" bindinput="schoolInput"></input>
   </view>
-  <view class="cu-form-group">
+  <view class="cu-form-group ">
     <view class="title">入学年份</view>
-    <picker mode="date" value="{{startYear}}" start="2015-09-01" end="2020-09-01" bindchange="YearChange">
-      <view class="picker">
-        {{startYear}}
-      </view>
-    </picker>
+    <input placeholder="{{startYear==0?'请输入入学年份':startYear}}" bindinput="YearChange"></input>
   </view>
   <view class="cu-form-group ">
     <view class="title">新密码</view>
