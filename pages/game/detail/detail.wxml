@@ -2,3 +2,41 @@
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
   <view slot="backText">返回</view>
 </cu-custom>
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg" bindtap="joinPlay">加入组局</button>
+  <button class="cu-btn bg-red margin-tb-sm lg" bindtap="quitPlay">退出组局</button>
+</view>
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 参与者列表
+    </view>
+  </view>
+  <block wx:for="{{students}}">
+    <view class="cu-list menu-avatar" id="{{item.studentId}}" bindtap="showInfo">
+      <view class="cu-item">
+        <view wx:if="{{item.photoUrl == null}}" class="cu-avatar radius lg" style="background-image:linear-gradient;"></view>
+        <view wx:else class="cu-avatar radius lg" style="background-image:url({{item.photoUrl}});"></view>
+        <view class="content">
+          <view class="text-grey">昵称：{{item.account?item.account:'未知'}}</view>
+          <view class="text-grey">性别：{{item.sex?(item.sex==0?'男':'女'):'未知'}}</view>
+        </view>
+        <view class="action">
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="cu-modal {{tip=='tip'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+          <view class="content">提示</view>
+          <view class="action" bindtap="hideTip">
+            <text class="cuIcon-close text-red"></text>
+          </view>
+        </view>
+        <view class="padding-xl">
+          {{tipContent}}
+        </view>
+      </view>
+    </view>
+</scroll-view>
