@@ -38,7 +38,7 @@ Page({
   switchToGame(e) {
     var gameId = e.currentTarget.id;
     wx.navigateTo({
-      url: "../game/index?gameId=" + gameId
+      url: "../../game/index?gameId=" + gameId
     })
   },
 

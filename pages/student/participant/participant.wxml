@@ -1,30 +1,26 @@
 <!--pages/student/participant/participant.wxml-->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content">{{name}}</view>
+  <view slot="content">我参与的组局</view>
 </cu-custom>
+
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 游戏列表
+      <text class="cuIcon-title text-orange "></text> 组局列表
     </view>
   </view>
-  <block wx:for="{{games}}">
-  <view class="cu-list menu-avatar" id="{{item.gameId}}" bindtap="switchToGame">
-    <view class="cu-item">
-      <view wx:if="{{item.imageUrl == null}}" class="cu-avatar radius lg" 
-      style="background-image:linear-gradient;"></view>
-      <view wx:else class="cu-avatar radius lg" 
-      style="background-image:url({{item.imageUrl}});"></view>
-      <view class="content">
-        <view class="text-grey">{{item.name}}</view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">{{item.description}}</text>
+  <block wx:for="{{plays}}">
+    <view class="cu-list menu-avatar" id="{{item.playId}}" bindtap="ToConcretPlay">
+      <view class="cu-item">
+        <view class="content2">
+          <view class="text-grey">组局时间：{{item.startTime}}</view>
+          <view class="text-grey">详细地址：{{item.location}}</view>
+          <view class="text-grey">参与者最小熟练分：{{item.minAdeptScore}}</view>
+        </view>
+        <view class="action">
         </view>
       </view>
-      <view class="action">
-      </view>
     </view>
-  </view>
   </block>
 </scroll-view>

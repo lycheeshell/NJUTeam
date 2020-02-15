@@ -9,7 +9,7 @@ Page({
    */
   data: {
     studentId:'',
-    games: []
+    plays: []
   },
 
   /**
@@ -29,16 +29,16 @@ Page({
       success: (res) => {
         console.log(res);
         this.setData({
-          games: res.data.data
+          plays: res.data.data
         })
       },
     });
   },
 
-  switchToGame(e) {
-    var gameId = e.currentTarget.id;
+  ToConcretPlay(e) {
+    var playId = e.currentTarget.id;
     wx.navigateTo({
-      url: "../game/index?gameId=" + gameId
+      url: '../../game/detail/detail?playId=' + playId + '&studentId=' + this.data.studentId
     })
   },
 

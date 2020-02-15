@@ -1,7 +1,7 @@
 <!--pages/student/history/history.wxml-->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content">{{name}}</view>
+  <view slot="content">历史游戏</view>
 </cu-custom>
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
   <view class="cu-bar bg-white solid-bottom margin-top">
