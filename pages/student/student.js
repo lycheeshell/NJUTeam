@@ -9,75 +9,138 @@ Page({
    * 页面的初始数据
    */
   data: {
+    studentId: '',
+    gameId:'',
+    imgUrl: '/images/avatar/1.jpg',
+    account:'',
+    credit:'',
+    actionSheetHidden: true, // 是否显示底部可选菜单
+    actionSheetItems: [{
+        bindtap: 'changeImage',
+        txt: '修改头像'
+      },
+      // {
+      //   bindtap: 'viewImage',
+      //   txt: '查看头像'
+      // }
+    ] // 底部可选菜单
 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (options){
+    this.setData({
+      studentId: wx.getStorageSync("studentId")
+    })
+    wxRequest({
+      url: 'team/student/query',
+      content_type: 'application/x-www-form-urlencoded; charset=UTF-8',
+      data: {
+        'studentId': this.data.studentId
+      },
+      success: (res) => {
+        console.log(res);
+        if(res.data.data!=null){
+          this.setData({
+            imgUrl: res.data.data.photoUrl,
+            account: res.data.data.account,
+            credit: res.data.data.credit
+          })
+        }
+      },
+    });
+  },
+  // 点击头像 显示底部菜单
+  clickImage: function() {
+    var that = this;
+    that.setData({
+      actionSheetHidden: !that.data.actionSheetHidden
+    })
+  },
+  // 点击其他区域 隐藏底部菜单
+  actionSheetbindchange: function() {
+    var that = this;
+    that.setData({
+      actionSheetHidden: !that.data.actionSheetHidden
+    })
+  },
+  changeImage: function() {
+    var that = this;
+    wx.chooseImage({
+      count: 1, 
+      sizeType: ['original', 'compressed'], 
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        var tempFilePaths = res.tempFilePaths;
+        wx.uploadFile({
+          url: 'http://115.29.224.114:8010/team/student/updateStudentPhoto',
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'session_token': wx.getStorageSync('session_token'),
+            // studentId: JSON.stringify(that.data.studentId)
+          }, 
+          header: {
+            content_type: 'multipart/form-data',
+          },
+          success: function(res) {
+            console.log(res);
+            if (JSON.parse(res.statusCode) == "200") {
+              that.setData({
+                'imgUrl': tempFilePaths[0],
+                'actionSheetHidden': !that.data.actionSheetHidden
+              });
+            }
+            wx.showModal({
+              title: '提示',
+              content: '上传成功',
+              showCancel: false
+            })
 
+          },fail: function (err) {
+            console.log(err);
+            wx.showModal({
+              title: '提示',
+              content: '上传失败',
+              showCancel: false
+            })
+          }
+        })
+      }
+    })
+  },
+  // 查看原图
+  viewImage: function() {
+    var that = this;
+    wx.previewImage({
+      current: this.data.imgUrl, // 当前显示图片的http链接
+      urls: [this.data.imgUrl], // 需要预览的图片http链接列表
+    })
+  },
+  switchToInfo(e) {
+    var stuId = e.currentTarget.id;
+    wx.navigateTo({
+      url: "../student/info/info?stuId=" + stuId
+    })
   },
   switchToParti(e) {
-    // var stuId = e.currentTarget.id;
-    // console.log(stuId);
-    // wx.navigateTo({
-    //   url: "../student/participant/participant?stuId=" + stuId
-    // })
+    var stuId = e.currentTarget.id;
+    wx.navigateTo({
+      url: "../student/participant/participant?stuId=" + stuId
+    })
   },
-  switchToHis(e){
-
+  switchToHis(e) {
+    var stuId = e.currentTarget.id;
+    wx.navigateTo({
+      url: "../student/history/history?stuId=" + stuId
+    })
   },
-  switchToAdmin(e){
-
-  }
-  ,
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  switchToAdmin(e) {
+    var stuId = e.currentTarget.id;
+    wx.navigateTo({
+      url: "../student/admin/admin?stuId=" + stuId
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
