@@ -14,7 +14,7 @@ Page({
     account: '',
     mail: '',
     phone: '',
-    sex: '选择',
+    sex: -1,
     sexlist: ['男', '女'],
     birthday: '选择',
     school: '',
@@ -71,7 +71,11 @@ Page({
       this.showModal4();
       return;
     }
-    sex == '男' ? 0 : 1;
+    // sex == '男' ? 0 : 1;
+    if(sex < 0 || sex >1) {
+      this.showModal1();
+      return;
+    }
     wxRequest({
       url: 'team/student/update',
       content_type: 'application/json',
@@ -86,7 +90,7 @@ Page({
         'startYear': startyear,
         'password':pwd,
         'photoUrl': imgUrl,
-         'credit':credit,
+        'credit':credit,
         'openid': wx.getStorageSync("openid"),
         'session_key':session_key
       },

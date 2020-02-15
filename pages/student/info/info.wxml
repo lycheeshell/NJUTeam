@@ -19,7 +19,7 @@
   <view class="cu-form-group">
     <view class="title">性别</view>
     <picker bindchange="PickerChange" range="{{sexlist}}" value="{{sex}}">
-      <view class="picker"> {{sex}}</view>
+      <view class="picker">{{sex>=0?sexlist[sex]:'选择'}}</view>
     </picker>
   </view>
   <view class="cu-form-group">
