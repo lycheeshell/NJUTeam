@@ -5,14 +5,15 @@
 <view class="bg-white padding ">
   <view class="flex justify-center">
     <view class="flex bg-white padding-sm margin-xs radius">
-      <view class="cu-avatar round xl margin-left" style="background-image:url(/images/avatar/1.jpg)" bindtap=""></view>
+      <view class="cu-avatar round xl margin-left" style="background-image:url({{imgUrl}})" bindtap="clickImage">
+      </view>
     </view>
     <view class="flex bg-white padding-sm margin-xs radius justify-center">
       <view class="grid col-1 margin-bottom ">
         <view class="bg-white padding">
-          <text class="text-black text-bold">用户昵称</text>
+          <text class="text-black text-bold">{{account}}</text>
         </view>
-        <view class="bg-white padding">个人信息修改
+        <view class="bg-white padding" bindtap="switchToInfo">个人信息修改
           <text class="cuIcon-write lg text-gray" bindtap=""></text>
         </view>
       </view>
@@ -22,7 +23,7 @@
         <view class="bg-white padding">
           <text class="text-black text-bold">信誉积分</text>
         </view>
-        <view class="bg-white padding">200</view>
+        <view class="bg-white padding">{{credit}}</view>
       </view>
     </view>
   </view>
@@ -31,20 +32,9 @@
 <scroll-view class="page">
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
-      <text class="cuIcon-title text-grey">我参与的游戏</text>
+      <text class="cuIcon-title text-grey">我参与的组局</text>
     </view>
     <view class="action" bindtap="switchToParti">
-      <view class="cu-item" >
-        <text class="cuIcon-roundright xl text-gray"></text>
-        <text>更多</text>
-      </view>
-    </view>
-  </view>
-  <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action" bindtap="switchToHis">
-      <text class="cuIcon-title text-grey">历史游戏</text>
-    </view>
-    <view class="action">
       <view class="cu-item">
         <text class="cuIcon-roundright xl text-gray"></text>
         <text>更多</text>
@@ -52,10 +42,21 @@
     </view>
   </view>
   <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action" bindtap="switchToAdmin">
+    <view class="action">
+      <text class="cuIcon-title text-grey">历史游戏</text>
+    </view>
+    <view class="action" bindtap="switchToHis">
+      <view class="cu-item">
+        <text class="cuIcon-roundright xl text-gray"></text>
+        <text>更多</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
       <text class="cuIcon-title text-grey">管理</text>
     </view>
-    <view class="action">
+    <view class="action" bindtap="switchToAdmin">
       <view class="cu-item">
         <text class="cuIcon-roundright xl text-gray"></text>
         <text>更多</text>
@@ -63,3 +64,9 @@
     </view>
   </view>
 </scroll-view>
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+  <block wx:for="{{actionSheetItems}}" wx:key="unique">
+    <action-sheet-item bindtap="{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+  </block>
+  <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+</action-sheet>

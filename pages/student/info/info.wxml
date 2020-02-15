@@ -1,2 +1,98 @@
 <!--pages/student/info/info.wxml-->
-<text>pages/student/info/info.wxml</text>
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">个人信息</view>
+</cu-custom>
+<form class="">
+  <view class="cu-form-group">
+    <view class="title">账户名</view>
+    <input placeholder="请输入账户名" bindinput="accountInput"></input>
+  </view>
+  <view class="cu-form-group ">
+    <view class="title">邮箱</view>
+    <input placeholder="请输入邮箱" bindinput="mailInput"></input>
+  </view>
+  <view class="cu-form-group ">
+    <view class="title">手机号码</view>
+    <input placeholder="请输入手机号码" bindinput="phoneInput"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <picker bindchange="PickerChange" range="{{sexlist}}" value="{{sex}}">
+      <view class="picker"> {{sex}}</view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">出生日期</view>
+    <picker mode="date" value="{{birthday}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+      <view class="picker">
+        {{birthday}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group ">
+    <view class="title">所在学校</view>
+    <input placeholder="请输入学校名字" bindinput="schoolInput"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">入学年份</view>
+    <picker mode="date" value="{{startYear}}" start="2015-09-01" end="2020-09-01" bindchange="YearChange">
+      <view class="picker">
+        {{startYear}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group ">
+    <view class="title">新密码</view>
+    <input type="password" placeholder=" 请输入新密码" bindinput="pwdInput"></input>
+  </view>
+  <view class="cu-form-group ">
+    <view class="title">确认新密码</view>
+    <input  type="password" placeholder="请确认新密码" bindinput="newpwdInput"></input>
+  </view>
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-blue lg" bindtap="updateInfo">提交</button>
+  </view>
+</form>
+<!-- 更新成功提示的弹窗 -->
+<view class="cu-modal {{modalName2=='Modal2'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">完成</view>
+      <view class="action" bindtap="hideModal2">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      个人信息更新成功！
+    </view>
+  </view>
+</view>
+<!-- 请填写完整信息的弹窗 -->
+<view class="cu-modal {{modalName1=='Modal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">注意</view>
+      <view class="action" bindtap="hideModal1">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      信息填写不完整！
+    </view>
+  </view>
+</view>
+<!-- 密码不一致的弹窗 -->
+<view class="cu-modal {{modalName4=='Modal4'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">注意</view>
+      <view class="action" bindtap="hideModal4">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      2次填写密码不一致
+    </view>
+  </view>
+</view>
