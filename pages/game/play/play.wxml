@@ -3,3 +3,24 @@
   <view slot="backText">返回</view>
   <view slot="content">{{name}}</view>
 </cu-custom>
+
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 组局列表
+    </view>
+  </view>
+  <block wx:for="{{plays}}">
+    <view class="cu-list menu-avatar" id="{{item.playId}}" bindtap="ToConcretPlay">
+      <view class="cu-item">
+        <view class="content2">
+          <view class="text-grey">组局时间：{{item.startTime}}</view>
+          <view class="text-grey">详细地址：{{item.location}}</view>
+          <view class="text-grey">参与者最小熟练分：{{item.minAdeptScore}}</view>
+        </view>
+        <view class="action">
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

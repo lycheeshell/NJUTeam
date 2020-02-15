@@ -8,7 +8,8 @@
     "pages/student/participant/participant",
     "pages/student/admin/admin",
     "pages/student/info/info",
-    "pages/game/play/play"
+    "pages/game/play/play",
+    "pages/game/detail/detail"
   ],
   "window": {
     "navigationStyle": "custom"

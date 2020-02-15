@@ -1,7 +1,8 @@
 <!--pages/search/search.wxml-->
 <cu-custom bgColor="bg-gradual-green">
-	<view slot="content">搜索</view>
+  <view slot="content">搜索</view>
 </cu-custom>
+
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
   <view class="search-form round">
     <text class="cuIcon-search"></text>
@@ -12,6 +13,7 @@
   </view>
 </view>
 
+
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
@@ -19,21 +21,19 @@
     </view>
   </view>
   <block wx:for="{{games}}">
-  <view class="cu-list menu-avatar" id="{{item.gameId}}" bindtap="switchToGame">
-    <view class="cu-item">
-      <view wx:if="{{item.imageUrl == null}}" class="cu-avatar radius lg" 
-      style="background-image:linear-gradient;"></view>
-      <view wx:else class="cu-avatar radius lg" 
-      style="background-image:url({{item.imageUrl}});"></view>
-      <view class="content">
-        <view class="text-grey">{{item.name}}</view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">{{item.description}}</text>
+    <view class="cu-list menu-avatar" id="{{item.gameId}}" bindtap="switchToGame">
+      <view class="cu-item">
+        <view wx:if="{{item.imageUrl == null}}" class="cu-avatar radius lg" style="background-image:linear-gradient;"></view>
+        <view wx:else class="cu-avatar radius lg" style="background-image:url({{item.imageUrl}});"></view>
+        <view class="content">
+          <view class="text-grey">{{item.name}}</view>
+          <view class="text-gray text-sm flex">
+            <text class="text-cut">{{item.description}}</text>
+          </view>
+        </view>
+        <view class="action">
         </view>
       </view>
-      <view class="action">
-      </view>
     </view>
-  </view>
   </block>
 </scroll-view>
