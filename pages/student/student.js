@@ -43,8 +43,12 @@ Page({
       success: (res) => {
         console.log(res);
         if(res.data.data!=null){
+          if (res.data.data.photoUrl != null) {
+            this.setData({
+              imgUrl: res.data.data.photoUrl
+            })
+          }
           this.setData({
-            imgUrl: res.data.data.photoUrl,
             account: res.data.data.account,
             credit: res.data.data.credit
           })
@@ -79,7 +83,7 @@ Page({
           filePath: res.tempFilePaths[0],
           name: 'file',
           formData: {
-            'session_token': wx.getStorageSync('session_token'),
+            'studentId': wx.getStorageSync('studentId')
             // studentId: JSON.stringify(that.data.studentId)
           }, 
           header: {
@@ -87,19 +91,29 @@ Page({
           },
           success: function(res) {
             console.log(res);
-            if (JSON.parse(res.statusCode) == "200") {
+            var dataRes = JSON.parse(res.data);
+            if (JSON.parse(res.statusCode) == '200' && dataRes.status == 200) {
               that.setData({
                 'imgUrl': tempFilePaths[0],
                 'actionSheetHidden': !that.data.actionSheetHidden
               });
+              wx.showModal({
+                title: '提示',
+                content: '上传成功',
+                showCancel: false
+              })
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '上传失败',
+                showCancel: false
+              })
+              that.setData({
+                'actionSheetHidden': !that.data.actionSheetHidden
+              });
             }
-            wx.showModal({
-              title: '提示',
-              content: '上传成功',
-              showCancel: false
-            })
-
-          },fail: function (err) {
+          },
+          fail: function (err) {
             console.log(err);
             wx.showModal({
               title: '提示',
