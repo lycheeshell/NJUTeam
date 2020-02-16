@@ -19,7 +19,7 @@
         <view wx:else class="cu-avatar radius lg" style="background-image:url({{item.photoUrl}});"></view>
         <view class="content">
           <view class="text-grey">昵称：{{item.account?item.account:'未知'}}</view>
-          <view class="text-grey">性别：{{item.sex?(item.sex==0?'男':'女'):'未知'}}</view>
+          <view class="text-grey">性别：{{item.sex==0?'男':(item.sex==1?'女':'未知')}}</view>
         </view>
         <view class="action">
         </view>
