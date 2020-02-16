@@ -106,6 +106,9 @@ Page({
               content: '上传失败',
               showCancel: false
             })
+            that.setData({
+              'actionSheetHidden': !that.data.actionSheetHidden
+            });
           }
         })
       }
