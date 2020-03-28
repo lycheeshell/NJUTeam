@@ -9,6 +9,7 @@ Page({
     playId: '',
     studentId: '',
     students: [],
+    tip: null,
     tipContent: ''
   },
 
@@ -45,8 +46,13 @@ Page({
       },
       success: (res) => {
         console.log(res);
+        if (res.data.status == 200 && res.data.data == -1) {
+          this.showTip('信誉分不够，加入组局失败！');
+        }
         if(res.data.status == 200) {
           this.showTip('加入组局成功！');
+        } else {
+          this.showTip('res.data.msg')
         }
       },
     });
@@ -65,6 +71,8 @@ Page({
         console.log(res);
         if (res.data.status == 200) {
           this.showTip('退出组局成功！');
+        } else {
+          this.showTip('res.data.msg')
         }
       },
     });
