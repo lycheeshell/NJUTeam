@@ -1,5 +1,5 @@
 const app = getApp();
-const prefix = "http://115.29.224.114:8010/";
+const prefix = "https://www.njuteam.top/";
 const wxRequest = (params, url) => {
   let auth = wx.getStorageSync("openid")
   if (auth == '') {

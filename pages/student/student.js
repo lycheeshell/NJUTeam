@@ -79,7 +79,7 @@ Page({
       success: function(res) {
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
-          url: 'http://115.29.224.114:8010/team/student/updateStudentPhoto',
+          url: app.globalData.prefix_url + 'team/student/updateStudentPhoto',
           filePath: res.tempFilePaths[0],
           name: 'file',
           formData: {

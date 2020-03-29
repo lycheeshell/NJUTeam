@@ -9,7 +9,7 @@ App({
           console.log('weixin code : ' + res.code);
           //发起网络请求
           wx.request({
-            url: 'http://115.29.224.114:8010/team/student/wxlogin',
+            url: this.globalData.prefix_url + 'team/student/wxlogin',
             data: {
               code: res.code
             },
@@ -59,7 +59,7 @@ App({
           console.log('weixin code : ' + res.code);
           //发起网络请求
           wx.request({
-            url: 'http://115.29.224.114:8010/team/student/wxlogin',
+            url: this.globalData.prefix_url + 'team/student/wxlogin',
             data: {
               code: res.code
             },
@@ -90,6 +90,6 @@ App({
   globalData: {
     studentId: '',
     openid: '',
-    prefix_url: "http://115.29.224.114:8010/"
+    prefix_url: "https://www.njuteam.top/"
   }
 })
