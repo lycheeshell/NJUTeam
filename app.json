@@ -9,7 +9,8 @@
     "pages/student/admin/admin",
     "pages/student/info/info",
     "pages/game/play/play",
-    "pages/game/detail/detail"
+    "pages/game/detail/detail",
+    "pages/game/show/show"
   ],
   "window": {
     "navigationStyle": "custom"

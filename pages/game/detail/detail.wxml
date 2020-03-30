@@ -27,16 +27,16 @@
     </view>
   </block>
   <view class="cu-modal {{tip=='tip'?'show':''}}">
-      <view class="cu-dialog">
-        <view class="cu-bar bg-white justify-end">
-          <view class="content">提示</view>
-          <view class="action" bindtap="hideTip">
-            <text class="cuIcon-close text-red"></text>
-          </view>
-        </view>
-        <view class="padding-xl">
-          {{tipContent}}
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">提示</view>
+        <view class="action" bindtap="hideTip">
+          <text class="cuIcon-close text-red"></text>
         </view>
       </view>
+      <view class="padding-xl">
+        {{tipContent}}
+      </view>
     </view>
+  </view>
 </scroll-view>

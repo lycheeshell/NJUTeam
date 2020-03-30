@@ -52,7 +52,7 @@ Page({
         if(res.data.status == 200) {
           this.showTip('加入组局成功！');
         } else {
-          this.showTip('res.data.msg')
+          this.showTip('加入组局失败！')
         }
       },
     });
@@ -72,18 +72,22 @@ Page({
         if (res.data.status == 200) {
           this.showTip('退出组局成功！');
         } else {
-          this.showTip('res.data.msg')
+          this.showTip('退出组局失败！')
         }
       },
     });
   },
 
   showInfo(e) {
-    var studentId = e.currentTarget.id;
     // itr 2 展示对方的信息
-
-
-
+    var playId = this.data.playId;
+    var selfStudentId = this.data.studentId;
+    var anotherStudentId = e.currentTarget.id;
+    if(selfStudentId != anotherStudentId) {
+      wx.navigateTo({
+        url: '../show/show?playId=' + playId + '&anotherStudentId=' + anotherStudentId
+      })
+    }
   },
 
   showTip(msg) {

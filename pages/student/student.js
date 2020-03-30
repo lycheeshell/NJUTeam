@@ -78,6 +78,7 @@ Page({
       sourceType: ['album', 'camera'],
       success: function(res) {
         var tempFilePaths = res.tempFilePaths;
+        console.log(app.globalData.prefix_url + 'team/student/updateStudentPhoto');
         wx.uploadFile({
           url: app.globalData.prefix_url + 'team/student/updateStudentPhoto',
           filePath: res.tempFilePaths[0],

@@ -1,0 +1,40 @@
+<!--pages/game/show/show.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+</cu-custom>
+
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg" bindtap="addShow">对其展示信息</button>
+  <button class="cu-btn bg-red margin-tb-sm lg" bindtap="cancelShow">取消对其展示</button>
+</view>
+
+<view class="padding bg-white">
+  <view class="text-center padding">{{showResult}}</view>
+</view>
+
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>对方信息
+  </view>
+</view>
+<view class="padding bg-white">
+  <view class="text-left padding">昵称：{{anotherStudent.account}}</view>
+  <view class="text-left padding">性别：{{anotherStudent.sex==0?'男':(anotherStudent.sex==1?'女':'未知')}}</view>
+  <view class="text-left padding">电话：{{anotherStudent.phone}}</view>
+  <view class="text-left padding">学校：{{anotherStudent.school}}</view>
+  <view class="text-left padding">入学年份：{{anotherStudent.startYear}}</view>
+</view>
+
+<view class="cu-modal {{tip=='tip'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">提示</view>
+      <view class="action" bindtap="hideTip">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      {{tipContent}}
+    </view>
+  </view>
+</view>
