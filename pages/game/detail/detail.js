@@ -52,7 +52,7 @@ Page({
         if(res.data.status == 200) {
           this.showTip('加入组局成功！');
         } else {
-          this.showTip('加入组局失败！')
+          this.showTip('加入组局失败！' + res.data.msg)
         }
       },
     });
@@ -72,7 +72,7 @@ Page({
         if (res.data.status == 200) {
           this.showTip('退出组局成功！');
         } else {
-          this.showTip('退出组局失败！')
+          this.showTip('退出组局失败！' + res.data.msg)
         }
       },
     });
