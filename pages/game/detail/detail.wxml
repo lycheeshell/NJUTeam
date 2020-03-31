@@ -5,6 +5,7 @@
 <view class="padding flex flex-direction">
   <button class="cu-btn bg-green lg" bindtap="joinPlay">加入组局</button>
   <button class="cu-btn bg-red margin-tb-sm lg" bindtap="quitPlay">退出组局</button>
+  <button class="cu-btn bg-yellow lg" bindtap="signIn">签到</button>
 </view>
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
   <view class="cu-bar bg-white solid-bottom margin-top">

@@ -170,7 +170,12 @@ Page({
       return;
     }
 
-    if (location == '' || minPerson < 0 || maxPerson < 0 || minAdeptScore < 0 || minAdeptScore > 100) {
+    if (location == '' || minPerson <= 0 || maxPerson <= 0 || minAdeptScore < 0 || minAdeptScore > 100) {
+      this.showModal1();
+      return;
+    }
+
+    if (minPerson > maxPerson) {
       this.showModal1();
       return;
     }

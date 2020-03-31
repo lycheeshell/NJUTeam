@@ -78,6 +78,26 @@ Page({
     });
   },
 
+  signIn(e) {
+    wxRequest({
+      url: 'team/play/signIn',
+      content_type: 'application/x-www-form-urlencoded; charset=UTF-8',
+      method: 'POST',
+      data: {
+        'playId': this.data.playId,
+        'studentId': this.data.studentId
+      },
+      success: (res) => {
+        console.log(res);
+        if (res.data.status == 200) {
+          this.showTip('签到成功！');
+        } else {
+          this.showTip('签到失败！' + res.data.msg)
+        }
+      },
+    });
+  },
+
   showInfo(e) {
     // itr 2 展示对方的信息
     var playId = this.data.playId;
