@@ -156,8 +156,8 @@ Page({
   },
   switchToAdmin(e) {
     var stuId = e.currentTarget.id;
-    wx.navigateTo({
-      url: "../student/admin/admin?stuId=" + stuId
-    })
+    // wx.navigateTo({
+    //   url: "../student/admin/admin?stuId=" + stuId
+    // })
   },
 })
