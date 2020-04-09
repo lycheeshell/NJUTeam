@@ -234,19 +234,19 @@ Page({
 
   minPersonInput: function (e) {
     this.setData({
-      minPerson: e.detail.value
+      minPerson: parseInt(e.detail.value)
     })
   },
 
   maxPersonInput: function (e) {
     this.setData({
-      maxPerson: e.detail.value
+      maxPerson: parseInt(e.detail.value)
     })
   },
 
   minAdeptScoreInput: function (e) {
     this.setData({
-      minAdeptScore: e.detail.value
+      minAdeptScore: parseInt(e.detail.value)
     })
   },
 

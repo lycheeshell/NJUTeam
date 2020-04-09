@@ -110,9 +110,9 @@ Page({
         console.log(res);
         if (res.data.status == 200) {
           this.showModal2();
-          wx.navigateTo({
-            url: "../student/student"
-          })
+          // wx.navigateTo({
+          //   url: "../student"
+          // })
         } else {
           this.showModal1();
         }

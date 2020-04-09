@@ -27,7 +27,8 @@
       </view>
     </view>
   </block>
-  <view class="cu-modal {{tip=='tip'?'show':''}}">
+</scroll-view>
+<view class="cu-modal {{tip=='tip'?'show':''}}">
     <view class="cu-dialog">
       <view class="cu-bar bg-white justify-end">
         <view class="content">提示</view>
@@ -40,4 +41,3 @@
       </view>
     </view>
   </view>
-</scroll-view>
